@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="NearbyPlaces.View.Nearby"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NearbyPlaces.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:VM="using:NearbyPlaces.ViewModel"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <VM:NearbyVM/>
+    </Page.DataContext>
+
+    <Page.BottomAppBar>
+        <CommandBar x:Name="myCommandBar">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Name="btnRefresh" Label="Refresh" Icon="Refresh" Click="btnRefresh_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid>
+        <Grid x:Name="LayoutRoot" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="12*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,2" Background="#FF0D9BEC" Orientation="Horizontal">
+                <Image Source="/Assets/Location -05.png"/>
+                <TextBlock Text="Around me" FontSize="24"  VerticalAlignment="Center" Foreground="White" />
+            </StackPanel>
+           
+
+            <Grid x:Name="ContentPanel" Grid.Row="1" Background="#68a255">
+            
+                <ListView IsItemClickEnabled="True" ItemClick="dataNear_ItemClick" Name="dataNear" ItemsSource="{Binding Path=ListPlaces}">
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#fcfdfe" HorizontalAlignment="Stretch" Width="400"  BorderThickness="0,0,0,1" >
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0" Background="#d8412f">
+                                        <Ellipse Width="50" Height="50">
+                                            <Ellipse.Fill>
+                                                <ImageBrush  Stretch="Uniform" ImageSource="{Binding Icon}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Grid>
+                                    
+                                    <StackPanel Grid.Column="1" Margin="10" >
+                                        <TextBlock Text="{Binding PlaceName}" TextWrapping="WrapWholeWords" Foreground="#fdffff" FontSize="24"/>
+
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Name="iconDistance" Width="32" Height="32" Grid.Column="0" Source="/Assets/Location.png"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Distance}" Foreground="#fdffff" FontSize="18"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>
