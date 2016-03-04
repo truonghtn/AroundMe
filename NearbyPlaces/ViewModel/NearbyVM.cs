@@ -76,7 +76,7 @@ namespace NearbyPlaces.ViewModel
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 
-                HttpResponseMessage response = await client.GetAsync(new Uri("https://api.foursquare.com/v2/venues/explore?ll=" + "10.8043437,106.64407349999999" + "&oauth_token=BFOWNUPCIQQWAAPPTQXGRO5DY3MEFVZSR4YXJP0YAPU0GKL4&v=20160228"));
+                HttpResponseMessage response = await client.GetAsync(new Uri("https://api.foursquare.com/v2/venues/explore?ll=" + pos.Coordinate.Latitude +","+ pos.Coordinate.Longitude + "&oauth_token=BFOWNUPCIQQWAAPPTQXGRO5DY3MEFVZSR4YXJP0YAPU0GKL4&v=20160228"));
                 if (response.IsSuccessStatusCode)
                 {
                     //Text đọc từ json
